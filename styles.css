@@ -685,9 +685,9 @@ a {
 }
 
 .slice-structure .filter-pill {
-  position: absolute;
-  left: 1344px;
-  top: 120px;
+  position: static;
+  flex: 0 0 auto;
+  margin-top: 43px;
   width: 216px;
   height: 52px;
   background: transparent;
@@ -1505,7 +1505,7 @@ a {
 
 .proof--master {
   --proof-master-offset: 120px;
-  height: 2475px;
+  height: 2276px;
   padding-top: 0;
 }
 
@@ -1526,6 +1526,8 @@ a {
   top: calc(315px + var(--proof-master-offset, 0px));
   width: 1924px;
   height: 724px;
+  overflow: hidden;
+  background: #0a0a0b;
 }
 
 .proof__background img {
@@ -1639,7 +1641,7 @@ a {
 .proof-carousel--master {
   position: absolute;
   left: -25px;
-  top: calc(1573.103px + var(--proof-master-offset, 0px));
+  top: calc(1374px + var(--proof-master-offset, 0px));
 }
 
 .proof-carousel--master img:nth-child(1) {
@@ -1926,7 +1928,7 @@ a {
 .proof-testimonial--master {
   position: absolute;
   left: 360px;
-  top: calc(2166.103px + var(--proof-master-offset, 0px));
+  top: calc(1966.884px + var(--proof-master-offset, 0px));
 }
 
 .proof-testimonial__arrow {
@@ -2661,6 +2663,10 @@ a {
 
   .slice-structure__head {
     align-items: center;
+  }
+
+  .slice-structure .filter-pill {
+    margin-top: 0;
   }
 
   .structure-cards {

@@ -219,6 +219,24 @@ Rodada de refinamento pixel perfect feita depois do primeiro commit:
 - Corrigida a secao "Programa de aceleracao / Aqui, voce vai alem da operacao" com fundo escuro, tipografia, pesos, cores, icones e barra de progresso alinhados ao dump do Figma.
 - Corrigido o carrossel de depoimentos visuais para respeitar as dimensoes reais dos exports (`dep1..dep5`, `image 512`, `image 508`) em vez de forcar todos para a mesma altura.
 
+## Atualizacao - 2026-04-27 19:37 BRT
+
+Rodada de ajustes finos na home:
+
+- Corrigida a secao "Aqui, voce aprende o que realmente constroi um negocio de verdade": o botao `Modo Outsider` deixou de usar posicionamento absoluto solto e passou a participar do flex do cabecalho, evitando quebra no desktop. No mobile, a margem extra foi zerada.
+- Corrigida a imagem da secao de premiacao/prova do Master. A imagem nova exportada em `imagens-exported/bg-v2-section.png` foi copiada para `assets/images/proof/master-background.png` e o HTML passou a apontar para ela.
+- Removida a dependencia da imagem antiga `master-background.jpg` nessa secao, que tinha uma faixa branca/gradiente indesejada na base.
+- Mantido apenas `overflow: hidden` e fundo preto em `.proof__background`, sem overlay preto extra, porque a imagem nova ja vem com a base correta.
+- Corrigido o texto duplicado do headline: `+100 milhões milhões faturados` virou `+100 milhões faturados`.
+- Reduzido o espaco entre os cards `+R$65 Milhões` / `+R$26 Milhões` e a area de depoimentos visuais: `.proof-carousel--master` subiu de `1573.103px` para `1374px`.
+- Ajustado o bloco textual do testimonial `Master Outsider by OutsiderSchool©` para acompanhar a nova compactacao: `.proof-testimonial--master` subiu para `1966.884px`.
+- Reduzida a altura da secao `.proof--master` de `2475px` para `2276px`, evitando sobra grande antes da proxima secao.
+
+Validacao:
+
+- `npm test` passou antes dos ultimos ajustes de espaco e troca definitiva da imagem.
+- A pedido do usuario, nao foi rodado Playwright depois dos ultimos ajustes.
+
 ## Checkpoint - 2026-04-27
 
 Rodada de organizacao para preparar a `dev` antes da futura branch `deliverables`:
