@@ -1,6 +1,6 @@
 (function () {
   const PAGE_WIDTH = 1920;
-  const PAGE_HEIGHT = 18614;
+  const FALLBACK_PAGE_HEIGHT = 18614;
   const DRAG_THRESHOLD = 5;
   const SCROLL_SPEED = 1.35;
   const AUTO_INTERVAL_MS = 2200;
@@ -11,7 +11,9 @@
     const scale = Math.min(1, viewportWidth / PAGE_WIDTH);
     document.documentElement.style.setProperty("--page-scale", String(scale));
     const viewport = document.querySelector(".page-viewport");
-    if (viewport) viewport.style.height = `${PAGE_HEIGHT * scale}px`;
+    const page = document.querySelector(".figma-page");
+    const pageHeight = page ? page.scrollHeight : FALLBACK_PAGE_HEIGHT;
+    if (viewport) viewport.style.height = `${pageHeight * scale}px`;
   }
 
   function getStepPx(el) {
@@ -108,5 +110,10 @@
 
   updateScale();
   window.addEventListener("resize", updateScale);
+  window.addEventListener("load", updateScale);
+  const page = document.querySelector(".figma-page");
+  if (page && "ResizeObserver" in window) {
+    new ResizeObserver(updateScale).observe(page);
+  }
   document.querySelectorAll(".js-drag-scroll").forEach(initCarousel);
 })();
