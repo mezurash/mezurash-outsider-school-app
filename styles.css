@@ -1019,8 +1019,9 @@ a {
 
 .codigo-cards {
   height: 787px;
+  margin-top: -1px;
   background: #fff;
-  padding-top: 56px;
+  padding-top: 57px;
 }
 
 .codigo-cards > h2 {
@@ -1116,7 +1117,7 @@ a {
 }
 
 .chave-benefits {
-  height: 642px;
+  height: 670px;
   background: #0a0a0b;
   padding-top: 120px;
 }
@@ -1145,6 +1146,10 @@ a {
   height: 24px;
 }
 
+.chave-benefits .tag {
+  gap: 4px;
+}
+
 .chave-benefits h2 {
   margin: 0;
   width: 430px;
@@ -1164,15 +1169,27 @@ a {
   left: 1272px;
   top: 219px;
   width: 288px;
-  background: transparent;
-  border-color: rgba(125, 132, 139, 0.24);
-  color: rgba(125, 132, 139, 0.82);
+  background: rgba(247, 247, 247, 0.1);
+  border-color: rgba(255, 255, 255, 0.72);
+  color: rgba(247, 247, 247, 0.72);
   box-shadow: none;
+  gap: 4px;
+  padding: 16px 24px 16px 28px;
+  font-size: 18px;
+  line-height: normal;
+  font-weight: 500;
+  letter-spacing: 0.36px;
+}
+
+.filter-pill--right span {
+  opacity: 1;
+  mask: url("imagens-exported/Arrow/Chevron_Down.svg") center / contain no-repeat;
+  -webkit-mask: url("imagens-exported/Arrow/Chevron_Down.svg") center / contain no-repeat;
 }
 
 .benefit-icons {
   width: 1117px;
-  margin: 102px auto 0;
+  margin: 81px auto 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1200,9 +1217,10 @@ a {
 }
 
 .benefit-icons img {
-  width: 64px;
-  height: 64px;
+  width: 29px;
+  height: 28px;
   object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(242, 220, 177, 0.52));
 }
 
 .benefit-icons p {
@@ -1567,7 +1585,58 @@ a {
   margin: 102px 0 0 -290px;
 }
 
-.proof-carousel--wide img {
+.proof-carousel--wide img:nth-child(1) {
+  width: 401px;
+  height: 491px;
+}
+
+.proof-carousel--wide img:nth-child(2) {
+  width: 353px;
+  height: 491px;
+}
+
+.proof-carousel--wide img:nth-child(3) {
+  width: 260px;
+  height: 491px;
+}
+
+.proof-carousel--wide img:nth-child(4) {
+  width: 299px;
+  height: 491px;
+}
+
+.proof-carousel--wide img:nth-child(5) {
+  width: 263px;
+  height: 491px;
+}
+
+.proof-carousel--wide img:nth-child(6) {
+  width: 375px;
+  height: 387px;
+}
+
+.proof-carousel--wide img:nth-child(7) {
+  width: 270px;
+  height: 491px;
+}
+
+.proof-carousel--wide img:nth-child(8) {
+  width: 346px;
+  height: 491px;
+}
+
+.proof-carousel--wide img:nth-child(9) {
+  width: 464px;
+  height: 105px;
+}
+
+.proof-carousel--wide img:nth-child(10) {
+  width: 262px;
+  height: 491px;
+}
+
+.proof-carousel--wide img:nth-child(11) {
+  width: 261px;
   height: 491px;
 }
 
@@ -1715,10 +1784,10 @@ a {
   font-weight: 600;
 }
 
-.quote span {
-  color: var(--gold);
-  font-size: 22px;
-  letter-spacing: 1px;
+.testimonial-rating {
+  width: 151.9px;
+  height: 22.116px;
+  object-fit: contain;
 }
 
 .proof__bar {
@@ -1831,6 +1900,7 @@ a {
 .proof-testimonial__body img {
   width: 151.9px;
   height: 22.116px;
+  object-fit: contain;
 }
 
 .depo-header {
@@ -1902,8 +1972,8 @@ a {
 }
 
 .testimonial-quote__rating {
-  width: 152px;
-  height: 23px;
+  width: 151.9px;
+  height: 22.116px;
   object-fit: contain;
 }
 
