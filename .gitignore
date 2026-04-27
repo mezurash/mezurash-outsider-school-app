@@ -1,0 +1,39 @@
+.DS_Store
+.claude/settings.local.json
+node_modules/
+npm-debug.log*
+
+# Local design source and unused exported assets
+os-home-fig-2.fig
+imagens/print-01.png
+
+imagens-exported/Frame*
+imagens-exported/Group*
+imagens-exported/Vector-*
+imagens-exported/image*
+imagens-exported/Notification - Collapsed*
+
+imagens-exported/Gemini_Generated_Image_bc5dsabc5dsabc5d-removebg-preview 1.png
+imagens-exported/Icon.svg
+imagens-exported/MQV [logo] [horizontal extenso].svg
+imagens-exported/Mask group.jpg
+imagens-exported/Rectangle 4.svg
+imagens-exported/botao-saiba-mais-padrao.svg
+imagens-exported/botao-saiba-mais-padrao-1.svg
+imagens-exported/card-julia-da-silva.png
+imagens-exported/card-marcella-esteves.png
+imagens-exported/div-s3-s4.svg
+imagens-exported/icon-rodela-dourada.svg
+imagens-exported/icone-master-bruno.png
+imagens-exported/icone-master-bruno copy.png
+imagens-exported/logo-chave-1.svg
+imagens-exported/outider-logo-s1.svg
+imagens-exported/s1- ousider-school-logo.svg
+imagens-exported/s3-estatua-gesso.png
+imagens-exported/thumbs.png
+
+imagens-exported/alunos/adriel-araujo-power-ppt.webp
+imagens-exported/alunos/isadora-duarte.webp
+imagens-exported/alunos/kau-miranda.webp
+imagens-exported/alunos/marcella-estevs.webp
+imagens-exported/alunos/milena-nobrega.webp
