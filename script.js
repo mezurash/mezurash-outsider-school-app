@@ -1,5 +1,6 @@
 (function () {
   const PAGE_WIDTH = 1920;
+  const MOBILE_BREAKPOINT = 767;
   const FALLBACK_PAGE_HEIGHT = 18614;
   const DRAG_THRESHOLD = 5;
   const SCROLL_SPEED = 1.35;
@@ -8,10 +9,17 @@
 
   function updateScale() {
     const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
-    const scale = Math.min(1, viewportWidth / PAGE_WIDTH);
-    document.documentElement.style.setProperty("--page-scale", String(scale));
     const viewport = document.querySelector(".page-viewport");
     const page = document.querySelector(".figma-page");
+
+    if (viewportWidth <= MOBILE_BREAKPOINT) {
+      document.documentElement.style.setProperty("--page-scale", "1");
+      if (viewport) viewport.style.height = "auto";
+      return;
+    }
+
+    const scale = Math.min(1, viewportWidth / PAGE_WIDTH);
+    document.documentElement.style.setProperty("--page-scale", String(scale));
     const pageHeight = page ? page.scrollHeight : FALLBACK_PAGE_HEIGHT;
     if (viewport) viewport.style.height = `${pageHeight * scale}px`;
   }

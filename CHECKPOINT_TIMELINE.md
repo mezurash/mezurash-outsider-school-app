@@ -218,6 +218,56 @@ Rodada de refinamento pixel perfect feita depois do primeiro commit:
 - Corrigidos os cards de prova/micro-proof do Master e da Chave removendo avatar duplicado; o asset composto do Figma passou a ser usado como unidade.
 - Corrigida a secao "Programa de aceleracao / Aqui, voce vai alem da operacao" com fundo escuro, tipografia, pesos, cores, icones e barra de progresso alinhados ao dump do Figma.
 - Corrigido o carrossel de depoimentos visuais para respeitar as dimensoes reais dos exports (`dep1..dep5`, `image 512`, `image 508`) em vez de forcar todos para a mesma altura.
+
+## Checkpoint - 2026-04-27
+
+Rodada de organizacao para preparar a `dev` antes da futura branch `deliverables`:
+
+- Mantida a decisao de nao criar `deliverables` ainda; todo o trabalho continua na `dev`.
+- Reorganizados os assets usados pela landing em `assets/`, com nomes limpos e categorias:
+  - `assets/fonts`
+  - `assets/icons`
+  - `assets/logos`
+  - `assets/images/hero`
+  - `assets/images/codigo`
+  - `assets/images/master`
+  - `assets/images/chave`
+  - `assets/images/proof`
+  - `assets/images/students`
+  - `assets/images/testimonials`
+- Atualizadas todas as referencias de `index.html` e `styles.css` para os novos caminhos.
+- Mantidos arquivos internos/processo fora da limpeza final por enquanto, conforme decisao de trabalhar primeiro na `dev`.
+- Implementado mobile real sem quebrar o desktop pixel perfect:
+  - desktop continua com canvas Figma `1920px` e escala via `--page-scale`;
+  - mobile desliga a escala fixa via `script.js`;
+  - grid mobile central com shell de `431px`;
+  - coluna interna de `368px`;
+  - breakpoint adicional em `368px`;
+  - imagens/carrosseis no mobile preservam proporcao em vez de forcar crop;
+  - bloco placeholder `master-mockup` permanece oculto no mobile;
+  - setas/quote mobile ajustados para nao cortar texto.
+- JSON `imagens/a-chave.json` foi usado como referencia de convencao mobile:
+  - containers `431px`/`368px`;
+  - padding lateral recorrente de `30px`;
+  - titulos mobile/tablet em torno de `26px` a `32px`;
+  - textos auxiliares em torno de `16px` a `20px`.
+- Adicionado setup de testes:
+  - `package.json`
+  - `package-lock.json`
+  - `playwright.config.js`
+  - `tests/check-assets.mjs`
+  - `tests/landing.spec.js`
+- `.gitignore` atualizado para ignorar `test-results/` e `playwright-report/`.
+
+Validacao feita:
+
+- `npm run test:assets` passou com `100` referencias locais verificadas.
+- `npm test` passou com `5 passed`, `1 skipped`.
+- Screenshots manuais gerados e revisados em `431px` e `368px`.
+
+Observacao:
+
+- O mobile agora esta estruturalmente pronto e sem overflow horizontal, mas ainda pode receber refinamento visual fino caso novas imagens especificas sejam exportadas do Figma.
 - Corrigido o bloco final de video para voltar a ser placeholder de video, nao imagem aleatoria.
 - Revisado o componente Figma `5:1197` via MCP e convertido para um bloco textual estatico, sem setas e sem efeito de carrossel:
   - label `Oferecido by OutsiderSchool©`;

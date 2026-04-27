@@ -1,0 +1,15 @@
+{
+  "name": "outsider-school-home",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "npm run test:assets && npm run test:visual",
+    "test:assets": "node tests/check-assets.mjs",
+    "test:visual": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "http-server": "^14.1.1"
+  }
+}
