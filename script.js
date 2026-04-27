@@ -8,6 +8,7 @@
   const REVEAL_STAGGER_MS = 120;
   const REVEAL_STAGGER_MAX_MS = 600;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   function updateScale() {
     const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
@@ -245,6 +246,83 @@
       .forEach((node) => observer.observe(node));
   }
 
+  function initSmoothAnchorScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const hash = link.getAttribute("href");
+        if (!hash || hash === "#") return;
+
+        const target = document.querySelector(hash);
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: reducedMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    });
+  }
+
+  function initCustomCursor() {
+    if (!finePointer) return;
+
+    const cursor = document.createElement("div");
+    cursor.className = "cursor-orb";
+    cursor.setAttribute("aria-hidden", "true");
+    document.body.appendChild(cursor);
+    document.body.classList.add("has-custom-cursor");
+
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+    let hasPointer = false;
+
+    function setInteractiveState(target) {
+      const interactive = target.closest("a, button, [role='button'], .js-drag-scroll");
+      cursor.classList.toggle("is-interactive", Boolean(interactive));
+    }
+
+    function animate() {
+      currentX += (targetX - currentX) * 0.22;
+      currentY += (targetY - currentY) * 0.22;
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse") return;
+      targetX = event.clientX;
+      targetY = event.clientY;
+      if (!hasPointer) {
+        currentX = targetX;
+        currentY = targetY;
+        hasPointer = true;
+      }
+      cursor.classList.add("is-visible");
+      setInteractiveState(event.target);
+    });
+
+    window.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse") cursor.classList.add("is-dragging");
+    });
+
+    window.addEventListener("pointerup", () => {
+      cursor.classList.remove("is-dragging");
+    });
+
+    document.documentElement.addEventListener("mouseleave", () => {
+      cursor.classList.remove("is-visible", "is-interactive", "is-dragging");
+    });
+
+    document.documentElement.addEventListener("mouseenter", () => {
+      if (hasPointer) cursor.classList.add("is-visible");
+    });
+
+    animate();
+  }
+
   updateScale();
   window.addEventListener("resize", updateScale);
   window.addEventListener("load", updateScale);
@@ -253,5 +331,7 @@
     new ResizeObserver(updateScale).observe(page);
   }
   document.querySelectorAll(".js-drag-scroll").forEach(initCarousel);
+  initSmoothAnchorScroll();
   initRevealAnimations();
+  initCustomCursor();
 })();
