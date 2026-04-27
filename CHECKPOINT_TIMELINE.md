@@ -313,3 +313,34 @@ Proximo passo recomendado:
 1. Abrir o HTML local no browser.
 2. Comparar visualmente a secao de cards contra o Figma.
 3. Se ainda houver desvio, consultar o MCP do Figma apenas depois de esgotar a referencia local do `figma-slices-full.md`.
+
+## Atualizacao - 2026-04-27 - Program Sections Layout
+
+Commit criado:
+
+- `f07050c` - `fix: adjust program sections layout`
+
+Resumo:
+
+- Foi usado o dump local (`figma-dump.md`) como referencia principal, sem chamar MCP do Figma.
+- O carrossel da secao "A Chave" foi ajustado para respeitar dimensoes individuais do dump.
+- Ratings dos depoimentos foram padronizados com `imagens-exported/asset-5-stars.svg` e classe `testimonial-rating`.
+- Novo asset adicionado e versionado: `imagens-exported/outsider-school-logo-dourado.svg`.
+- Cards `Master Outsider` e `A Chave` passaram a usar o logo dourado como `program-cover__mark`.
+- Card `O Codigo` permaneceu com o asset original `imagens-exported/s1-icon-logo.svg`.
+- Removido `.codigo-visual::after`, que criava uma linha horizontal de `2px`.
+- Adicionado `margin-top: -1px` em `.product-cover--chave` para cobrir o encontro visual entre secoes.
+- `.codigo-cards` recebeu `padding-top: 120px` e `padding-bottom: 120px`, com altura ajustada para `878px`.
+- `.chave-benefits` recebeu `padding-bottom: 120px`, com altura ajustada para `790px`.
+- Footer real manteve `height: 319px`; problema de footer gigante vinha da altura fixa do canvas.
+- `.figma-page` passou de `height: 18614px` para `height: auto`.
+- `script.js` agora calcula altura pelo `page.scrollHeight * scale`, com recalculo em `resize`, `load` e `ResizeObserver`.
+
+Validacoes:
+
+- `git diff --check -- index.html styles.css script.js imagens-exported/outsider-school-logo-dourado.svg` sem saida.
+- `git status --short` limpo apos o commit.
+
+Nota:
+
+- `git add` e `git commit` precisaram de permissao elevada porque o sandbox bloqueou escrita no indice Git.
