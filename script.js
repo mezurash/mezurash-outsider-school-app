@@ -5,8 +5,8 @@
   const DRAG_THRESHOLD = 5;
   const SCROLL_SPEED = 1.35;
   const AUTO_INTERVAL_MS = 2200;
-  const REVEAL_STAGGER_MS = 120;
-  const REVEAL_STAGGER_MAX_MS = 600;
+  const REVEAL_STAGGER_MS = 180;
+  const REVEAL_STAGGER_MAX_MS = 960;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -246,6 +246,32 @@
     });
   }
 
+  function initProgressBars() {
+    const bars = Array.from(document.querySelectorAll(".progress"));
+    if (bars.length === 0) return;
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      bars.forEach((bar) => bar.classList.add("is-loaded"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-loaded");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.35,
+      },
+    );
+
+    bars.forEach((bar) => observer.observe(bar));
+  }
+
   function initCustomCursor() {
     if (!finePointer) return;
 
@@ -259,7 +285,9 @@
 
     function setInteractiveState(target) {
       const interactive = target.closest("a, button, [role='button'], .js-drag-scroll");
+      const textTarget = !interactive && target.closest("input, textarea, select, [contenteditable='true'], p, h1, h2, h3, h4, h5, h6, blockquote, li");
       cursor.classList.toggle("is-interactive", Boolean(interactive));
+      cursor.classList.toggle("is-text", Boolean(textTarget));
     }
 
     window.addEventListener("pointermove", (event) => {
@@ -275,6 +303,14 @@
     });
 
     window.addEventListener("pointerup", () => {
+      cursor.classList.remove("is-dragging");
+    });
+
+    window.addEventListener("pointercancel", () => {
+      cursor.classList.remove("is-dragging");
+    });
+
+    window.addEventListener("blur", () => {
       cursor.classList.remove("is-dragging");
     });
 
@@ -297,5 +333,5 @@
   document.querySelectorAll(".js-drag-scroll").forEach(initCarousel);
   initSmoothAnchorScroll();
   initRevealAnimations();
-  initCustomCursor();
+  initProgressBars();
 })();

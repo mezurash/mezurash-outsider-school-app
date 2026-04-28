@@ -74,6 +74,21 @@ a {
   font: inherit;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  body,
+  body :where(a, button, [role="button"], .js-drag-scroll) {
+    cursor: url("assets/icons/cursor-dot.svg") 11 11, auto;
+  }
+
+  body :where(input, textarea, select, [contenteditable="true"], p, h1, h2, h3, h4, h5, h6, blockquote, li) {
+    cursor: text;
+  }
+
+  body :where(a, button, [role="button"], .js-drag-scroll) :where(p, h1, h2, h3, h4, h5, h6, blockquote, li, span, strong, small) {
+    cursor: url("assets/icons/cursor-dot.svg") 11 11, auto;
+  }
+}
+
 html::-webkit-scrollbar {
   width: 12px;
 }
@@ -122,9 +137,9 @@ html::-webkit-scrollbar-thumb:hover {
   opacity: 1;
   translate: 0 0;
   animation-delay: var(--reveal-delay, 0ms);
-  animation-duration: var(--reveal-duration, 900ms);
+  animation-duration: var(--reveal-duration, 1250ms);
   animation-fill-mode: backwards;
-  animation-timing-function: ease;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-fade-up.is-revealed {
@@ -152,9 +167,9 @@ html::-webkit-scrollbar-thumb:hover {
   backdrop-filter: blur(4px);
   transition:
     opacity 160ms ease,
-    scale 180ms ease,
-    background 180ms ease,
-    border-color 180ms ease;
+    scale 70ms ease,
+    background 90ms ease,
+    border-color 90ms ease;
   will-change: opacity, scale;
 }
 
@@ -171,6 +186,10 @@ html::-webkit-scrollbar-thumb:hover {
 .cursor-orb.is-dragging {
   scale: 0.72;
   background: rgba(82, 165, 213, 0.36);
+}
+
+.cursor-orb.is-text {
+  opacity: 0;
 }
 
 @keyframes osFadeInUp {
@@ -255,11 +274,23 @@ html::-webkit-scrollbar-thumb:hover {
   .progress span::after {
     animation: none !important;
   }
+
+  .progress span {
+    transform: scaleX(1);
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
   body.has-custom-cursor,
   body.has-custom-cursor :where(a, button, [role="button"], .js-drag-scroll) {
+    cursor: none;
+  }
+
+  body.has-custom-cursor :where(input, textarea, select, [contenteditable="true"], p, h1, h2, h3, h4, h5, h6, blockquote, li) {
+    cursor: text;
+  }
+
+  body.has-custom-cursor :where(a, button, [role="button"], .js-drag-scroll) :where(p, h1, h2, h3, h4, h5, h6, blockquote, li, span, strong, small) {
     cursor: none;
   }
 }
@@ -395,6 +426,7 @@ html::-webkit-scrollbar-thumb:hover {
   font-weight: 600;
   letter-spacing: 0.17px;
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
 }
 
 .filter-pill img,
@@ -1258,30 +1290,6 @@ html::-webkit-scrollbar-thumb:hover {
   object-fit: contain;
 }
 
-.feature-icon-validate {
-  width: 74px;
-  height: 74px;
-  position: relative;
-  display: block;
-}
-
-.feature-icon-validate::before,
-.feature-icon-validate::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-}
-
-.feature-icon-validate::before {
-  background: #b4b4b5;
-}
-
-.feature-icon-validate::after {
-  background: #b6985e;
-  clip-path: inset(0 50% 0 0);
-}
-
 .feature-card-row p {
   margin: 0;
   color: var(--ink-72);
@@ -1418,7 +1426,6 @@ html::-webkit-scrollbar-thumb:hover {
   width: 30px;
   height: 30px;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(242, 220, 177, 0.52));
 }
 
 .benefit-icons p {
@@ -1463,7 +1470,6 @@ html::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(90deg, rgba(242, 220, 177, 0.72), var(--gold-soft) 56%, rgba(246, 231, 198, 0.94));
   transform: scaleX(0);
   transform-origin: left center;
-  animation: chaveProgressLoad 1600ms cubic-bezier(0.16, 1, 0.3, 1) 300ms forwards;
 }
 
 .progress span::after {
@@ -1473,7 +1479,14 @@ html::-webkit-scrollbar-thumb:hover {
   border-radius: inherit;
   background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.42) 48%, transparent 100%);
   transform: translateX(-120%);
-  animation: chaveProgressShine 1600ms cubic-bezier(0.16, 1, 0.3, 1) 300ms forwards;
+}
+
+.progress.is-loaded span {
+  animation: chaveProgressLoad 2600ms cubic-bezier(0.16, 1, 0.3, 1) 420ms forwards;
+}
+
+.progress.is-loaded span::after {
+  animation: chaveProgressShine 2400ms cubic-bezier(0.16, 1, 0.3, 1) 560ms forwards;
 }
 
 .chave-team {
@@ -2016,12 +2029,15 @@ html::-webkit-scrollbar-thumb:hover {
   justify-content: space-between;
 }
 
-.proof__bar img {
+.proof__bar > img {
   width: 384px;
 }
 
 .proof__bar .filter-pill,
 .depo-header .filter-pill {
+  width: 340px;
+  height: 52px;
+  flex: 0 0 auto;
   background: rgba(255, 255, 255, 0.08);
   color: rgba(247, 247, 247, 0.82);
   border-color: rgba(255, 255, 255, 0.1);
@@ -2060,22 +2076,11 @@ html::-webkit-scrollbar-thumb:hover {
   height: 36px;
   position: relative;
   flex: 0 0 auto;
-}
-
-.proof-testimonial__arrow::before {
-  content: "";
-  position: absolute;
-  left: 13.5px;
-  top: 9px;
-  width: 9px;
-  height: 18px;
-  border-left: 2px solid rgba(247, 247, 247, 0.72);
-  border-bottom: 2px solid rgba(247, 247, 247, 0.72);
-  transform: rotate(45deg);
+  background: url("imagens-exported/chevron-left.svg") center / contain no-repeat;
 }
 
 .proof-testimonial__arrow--next {
-  transform: rotate(180deg);
+  background-image: url("imagens-exported/chevron-right.svg");
 }
 
 .proof-testimonial blockquote {
@@ -3175,7 +3180,7 @@ html::-webkit-scrollbar-thumb:hover {
 
   .proof-testimonial__arrow--next {
     right: 0;
-    transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%);
   }
 
   .proof-testimonial blockquote {
@@ -3207,7 +3212,7 @@ html::-webkit-scrollbar-thumb:hover {
     align-items: center;
   }
 
-  .proof__bar img {
+  .proof__bar > img {
     width: min(280px, 78%);
   }
 
