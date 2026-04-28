@@ -1,6 +1,6 @@
 (function () {
   const PAGE_WIDTH = 1920;
-  const MOBILE_BREAKPOINT = 767;
+  const MOBILE_BREAKPOINT = 1080;
   const FALLBACK_PAGE_HEIGHT = 18614;
   const DRAG_THRESHOLD = 5;
   const SCROLL_SPEED = 1.35;
@@ -255,10 +255,6 @@
     document.body.appendChild(cursor);
     document.body.classList.add("has-custom-cursor");
 
-    let targetX = window.innerWidth / 2;
-    let targetY = window.innerHeight / 2;
-    let currentX = targetX;
-    let currentY = targetY;
     let hasPointer = false;
 
     function setInteractiveState(target) {
@@ -266,22 +262,10 @@
       cursor.classList.toggle("is-interactive", Boolean(interactive));
     }
 
-    function animate() {
-      currentX += (targetX - currentX) * 0.22;
-      currentY += (targetY - currentY) * 0.22;
-      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-      requestAnimationFrame(animate);
-    }
-
     window.addEventListener("pointermove", (event) => {
       if (event.pointerType !== "mouse") return;
-      targetX = event.clientX;
-      targetY = event.clientY;
-      if (!hasPointer) {
-        currentX = targetX;
-        currentY = targetY;
-        hasPointer = true;
-      }
+      hasPointer = true;
+      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
       cursor.classList.add("is-visible");
       setInteractiveState(event.target);
     });
@@ -301,8 +285,6 @@
     document.documentElement.addEventListener("mouseenter", () => {
       if (hasPointer) cursor.classList.add("is-visible");
     });
-
-    animate();
   }
 
   updateScale();

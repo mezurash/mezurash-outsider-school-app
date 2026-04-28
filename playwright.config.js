@@ -28,5 +28,12 @@ export default defineConfig({
         hasTouch: true,
       },
     },
+    {
+      name: "tablet",
+      use: {
+        viewport: { width: 900, height: 1100 },
+        hasTouch: true,
+      },
+    },
   ],
 });

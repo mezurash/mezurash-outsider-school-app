@@ -16,8 +16,8 @@ test("landing loads all local assets", async ({ page }) => {
   expect(failed).toEqual([]);
 });
 
-test("mobile layout has no horizontal document overflow", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "mobile", "Mobile-only layout check.");
+test("mobile and tablet layouts have no horizontal document overflow", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === "desktop", "Responsive layout check.");
 
   await page.goto("/");
   const metrics = await page.evaluate(() => ({
