@@ -2445,19 +2445,28 @@ html::-webkit-scrollbar-thumb:hover {
 @media (max-width: 1080px) {
   :root {
     --mobile-shell: 100%;
-    --mobile-grid: min(calc(100vw - 28px), 368px);
+    --mobile-grid: min(calc(100vw - 40px), 320px);
+    --mobile-wide: min(calc(100vw - 28px), 368px);
+    --mobile-header-h: 72px;
+    --mobile-section-y-sm: 56px;
     --mobile-section-y: 72px;
-    --mobile-section-x: max(14px, calc((100vw - var(--mobile-grid)) / 2));
+    --mobile-section-y-lg: 88px;
+    --mobile-section-x: max(20px, calc((100vw - var(--mobile-grid)) / 2));
+    --mobile-space-2: 8px;
+    --mobile-space-3: 12px;
     --mobile-space-4: 16px;
     --mobile-space-6: 24px;
     --mobile-space-8: 32px;
+    --mobile-space-12: 48px;
+    --mobile-card-r: 16px;
+    --mobile-button-r: 12px;
     --mobile-text-xs: 14px;
     --mobile-text-sm: 16px;
     --mobile-text-base: 18px;
     --mobile-text-lg: 20px;
     --mobile-text-xl: 24px;
-    --mobile-text-2xl: 30px;
-    --mobile-text-3xl: 36px;
+    --mobile-text-2xl: 29px;
+    --mobile-text-3xl: 30px;
   }
 
   html,
@@ -2499,9 +2508,12 @@ html::-webkit-scrollbar-thumb:hover {
   .site-header {
     position: sticky;
     width: var(--mobile-shell);
-    height: 72px;
-    padding: 0 20px;
-    background: rgba(0, 8, 24, 0.9);
+    height: var(--mobile-header-h);
+    padding: 0 var(--mobile-section-x);
+    background: rgba(10, 10, 11, 0.92);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   .site-header__content {
@@ -2541,7 +2553,7 @@ html::-webkit-scrollbar-thumb:hover {
   .section-heading {
     width: var(--mobile-grid);
     max-width: var(--mobile-grid);
-    gap: 18px;
+    gap: var(--mobile-space-4);
     padding: 0;
     margin-inline: auto;
     text-align: center;
@@ -2560,7 +2572,7 @@ html::-webkit-scrollbar-thumb:hover {
     width: 100%;
     max-width: none;
     font-size: var(--mobile-text-2xl);
-    line-height: 36px;
+    line-height: 33px;
     letter-spacing: 0;
     text-align: center;
     text-wrap: balance;
@@ -2568,23 +2580,30 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .brand-cta {
-    width: 100%;
+    width: min(322px, 100%);
+    min-height: 74px;
     height: auto;
     justify-content: center;
-    gap: 16px;
-    padding: 0 22px;
+    gap: 6px;
+    padding: 0 18px;
+    border-radius: var(--mobile-button-r);
     font-size: 14px;
+    line-height: 18px;
   }
 
   .brand-cta img {
-    width: 128px;
-    max-height: 38px;
+    width: auto;
+    max-width: 104px;
+    max-height: 34px;
+    flex: 0 1 auto;
   }
 
   .brand-cta span {
-    width: min(190px, 52%);
-    height: 56px;
-    padding: 0 22px;
+    width: auto;
+    min-width: 132px;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 10px;
   }
 
   .brand-cta span::after {
@@ -2610,18 +2629,19 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .slice-hero {
-    min-height: 792px;
-    padding: 96px var(--mobile-section-x) 0;
+    min-height: 760px;
+    padding: calc(var(--mobile-header-h) + 24px) var(--mobile-section-x) 0;
   }
 
   .slice-hero__copy {
-    width: 100%;
-    gap: 18px;
+    width: var(--mobile-grid);
+    gap: var(--mobile-space-4);
+    margin-inline: auto;
   }
 
   .slice-hero h1 {
     font-size: var(--mobile-text-3xl);
-    line-height: 40px;
+    line-height: 36px;
     text-wrap: balance;
   }
 
@@ -2630,7 +2650,7 @@ html::-webkit-scrollbar-thumb:hover {
     top: auto;
     bottom: 0;
     width: 100%;
-    height: 380px;
+    height: 392px;
   }
 
   .slice-hero__visual::before {
@@ -2646,8 +2666,8 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .slice-hero__photo {
-    width: 720px;
-    height: 374px;
+    width: 690px;
+    height: 392px;
     max-width: none;
   }
 
@@ -2685,6 +2705,15 @@ html::-webkit-scrollbar-thumb:hover {
     padding: var(--mobile-section-y) var(--mobile-section-x);
   }
 
+  .product-cover,
+  .codigo-cards,
+  .chave-team,
+  .alumni,
+  .video-final {
+    padding-top: var(--mobile-section-y-lg);
+    padding-bottom: var(--mobile-section-y-lg);
+  }
+
   .slice-about__body,
   .slice-structure__head,
   .feature-card-row,
@@ -2705,7 +2734,7 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .slice-about__body {
-    margin-top: var(--mobile-space-8);
+    margin-top: var(--mobile-space-12);
   }
 
   .slice-about__cover,
@@ -2724,9 +2753,10 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .metric-card {
-    aspect-ratio: 16 / 9;
-    min-height: 0;
-    padding: 20px 22px;
+    aspect-ratio: auto;
+    min-height: 320px;
+    border-radius: var(--mobile-card-r);
+    padding: 32px 26px;
     align-items: stretch;
     justify-content: space-between;
     gap: 0;
@@ -2800,8 +2830,8 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .structure-cards {
-    width: 100%;
-    margin: var(--mobile-space-8) 0 0;
+    width: var(--mobile-grid);
+    margin: var(--mobile-space-12) 0 0;
     grid-template-columns: 1fr;
     gap: 16px;
   }
@@ -2812,17 +2842,18 @@ html::-webkit-scrollbar-thumb:hover {
   .time-grid--bottom article,
   .time-grid--bottom article:first-child,
   .stats-row article {
-    width: 100%;
+    width: var(--mobile-grid);
     height: auto;
-    aspect-ratio: 16 / 9;
-    min-height: 0;
+    aspect-ratio: auto;
+    min-height: 220px;
+    border-radius: var(--mobile-card-r);
     align-items: center;
     justify-content: center;
   }
 
   .structure-cards article {
-    padding: 24px;
-    gap: 16px;
+    padding: 32px 26px;
+    gap: var(--mobile-space-6);
   }
 
   .structure-cards h3 {
@@ -2862,9 +2893,9 @@ html::-webkit-scrollbar-thumb:hover {
   .product-cover--master .program-cover {
     width: var(--mobile-grid);
     height: auto;
-    aspect-ratio: 1200 / 460;
-    margin: var(--mobile-space-8) 0 0;
-    border-radius: 18px;
+    aspect-ratio: 320 / 210;
+    margin: var(--mobile-space-12) 0 0;
+    border-radius: var(--mobile-card-r);
   }
 
   .program-cover::before,
@@ -2906,8 +2937,8 @@ html::-webkit-scrollbar-thumb:hover {
     justify-content: center;
     white-space: normal;
     text-align: center;
-    font-size: var(--mobile-text-base);
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 18px;
   }
 
   .codigo-visual__copy,
@@ -2919,8 +2950,8 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .codigo-visual__copy h2 {
-    font-size: 30px;
-    line-height: 34px;
+    font-size: var(--mobile-text-2xl);
+    line-height: 33px;
     text-align: center;
     text-wrap: balance;
   }
@@ -2928,13 +2959,13 @@ html::-webkit-scrollbar-thumb:hover {
   .codigo-visual__copy p,
   .video-final__text > p {
     width: 100%;
-    font-size: 18px;
-    line-height: 26px;
+    font-size: var(--mobile-text-xs);
+    line-height: 18px;
     text-align: center;
   }
 
   .codigo-visual {
-    min-height: 680px;
+    min-height: 650px;
   }
 
   .codigo-visual::after {
@@ -2992,25 +3023,25 @@ html::-webkit-scrollbar-thumb:hover {
   .codigo-cards > h2,
   .time-outsider .section-heading h2 {
     font-size: var(--mobile-text-2xl);
-    line-height: 36px;
+    line-height: 33px;
   }
 
   .feature-card-row {
-    margin-top: var(--mobile-space-8);
+    margin-top: var(--mobile-space-12);
   }
 
   .feature-card-row article,
   .time-grid article {
-    padding: 24px;
-    border-radius: 16px;
-    gap: 16px;
+    padding: 32px 26px;
+    border-radius: var(--mobile-card-r);
+    gap: var(--mobile-space-6);
   }
 
   .feature-card-row p,
   .time-grid p {
     width: 100% !important;
-    font-size: var(--mobile-text-lg);
-    line-height: 24px;
+    font-size: var(--mobile-text-sm);
+    line-height: 20px;
   }
 
   .chave-benefits .filter-pill--right {
@@ -3054,11 +3085,35 @@ html::-webkit-scrollbar-thumb:hover {
   .time-grid--top,
   .time-grid--bottom {
     height: auto;
-    margin-top: 16px;
+    margin-top: var(--mobile-space-4);
   }
 
   .time-outsider .brand-cta {
     margin-top: 36px;
+    width: min(322px, 100%);
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .time-outsider .brand-cta img {
+    width: auto;
+    max-width: 112px;
+    height: auto;
+    max-height: 34px;
+    object-fit: contain;
+  }
+
+  .time-outsider .brand-cta span {
+    min-width: 132px;
+    height: 48px;
+  }
+
+  .codigo-cards .brand-cta img {
+    max-width: 94px;
+  }
+
+  .codigo-cards .brand-cta span {
+    min-width: 132px;
   }
 
   .proof__background,
@@ -3129,9 +3184,9 @@ html::-webkit-scrollbar-thumb:hover {
   .proof-carousel--wide,
   .proof-carousel--deps,
   .alumni-row {
-    width: var(--mobile-grid);
-    max-width: var(--mobile-grid);
-    margin: 42px auto 0;
+    width: var(--mobile-wide);
+    max-width: var(--mobile-wide);
+    margin: var(--mobile-space-12) auto 0;
     padding: 0 0 12px;
     gap: 14px;
   }
@@ -3158,7 +3213,7 @@ html::-webkit-scrollbar-thumb:hover {
     width: var(--mobile-grid);
     max-width: var(--mobile-grid);
     height: auto;
-    margin-top: 48px;
+    margin-top: var(--mobile-space-12);
     position: relative;
     display: block;
   }
@@ -3202,7 +3257,7 @@ html::-webkit-scrollbar-thumb:hover {
     width: 100%;
     max-width: 100%;
     font-size: var(--mobile-text-xl);
-    line-height: 32px;
+    line-height: 30px;
   }
 
   .proof__bar {
@@ -3243,8 +3298,8 @@ html::-webkit-scrollbar-thumb:hover {
   .video-card {
     width: var(--mobile-grid);
     aspect-ratio: 16 / 9;
-    margin-top: var(--mobile-space-8);
-    border-radius: 18px;
+    margin-top: var(--mobile-space-12);
+    border-radius: var(--mobile-card-r);
   }
 
   .video-card button {
@@ -3282,13 +3337,14 @@ html::-webkit-scrollbar-thumb:hover {
 
 @media (max-width: 368px) {
   :root {
-    --mobile-grid: calc(100vw - 28px);
-    --mobile-section-x: 14px;
+    --mobile-grid: calc(100vw - 40px);
+    --mobile-wide: calc(100vw - 28px);
+    --mobile-section-x: 20px;
     --mobile-section-y: 64px;
   }
 
   .site-header {
-    padding-inline: 14px;
+    padding-inline: 16px;
   }
 
   .site-header__brand {
@@ -3316,17 +3372,18 @@ html::-webkit-scrollbar-thumb:hover {
 
   .brand-cta {
     gap: 10px;
-    padding: 0;
+    padding: 0 14px;
   }
 
   .brand-cta img {
-    width: 112px;
+    max-width: 92px;
   }
 
   .brand-cta span {
-    width: 166px;
+    width: auto;
+    min-width: 124px;
     height: 52px;
-    padding: 0 18px;
+    padding: 0 14px;
   }
 
   .program-cover,
