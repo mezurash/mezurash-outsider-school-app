@@ -372,13 +372,19 @@ html::-webkit-scrollbar-thumb:hover {
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.04);
 }
 
-.filter-pill span {
+.filter-pill::after {
+  content: "";
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
   background: currentColor;
   mask: url("assets/icons/chevron-down.svg") center / contain no-repeat;
   -webkit-mask: url("assets/icons/chevron-down.svg") center / contain no-repeat;
   opacity: 0.56;
+}
+
+.filter-pill span {
+  display: none;
 }
 
 .program-pill span {
@@ -794,12 +800,6 @@ html::-webkit-scrollbar-thumb:hover {
   letter-spacing: 0.36px;
 }
 
-.slice-structure .filter-pill span {
-  background: currentColor;
-  mask: url("assets/icons/chevron-down.svg") center / contain no-repeat;
-  -webkit-mask: url("assets/icons/chevron-down.svg") center / contain no-repeat;
-}
-
 /* Product covers. */
 .product-cover {
   height: 853px;
@@ -1125,6 +1125,15 @@ html::-webkit-scrollbar-thumb:hover {
   padding-top: 102px;
 }
 
+.codigo-visual::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 599px);
+  top: 555px;
+  width: 1200px;
+  border-top: 2px solid rgba(211, 211, 211, 0.42);
+}
+
 .codigo-visual__copy {
   position: relative;
   z-index: 2;
@@ -1363,10 +1372,8 @@ html::-webkit-scrollbar-thumb:hover {
   letter-spacing: 0.36px;
 }
 
-.filter-pill--right span {
+.filter-pill--right::after {
   opacity: 1;
-  mask: url("assets/icons/chevron-down.svg") center / contain no-repeat;
-  -webkit-mask: url("assets/icons/chevron-down.svg") center / contain no-repeat;
 }
 
 .benefit-icons {
@@ -1399,8 +1406,8 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .benefit-icons img {
-  width: 29px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(242, 220, 177, 0.52));
 }
@@ -2001,11 +2008,9 @@ html::-webkit-scrollbar-thumb:hover {
   letter-spacing: 0.36px;
 }
 
-.proof__bar .filter-pill span,
-.depo-header .filter-pill span {
+.proof__bar .filter-pill::after,
+.depo-header .filter-pill::after {
   opacity: 1;
-  mask: url("assets/icons/chevron-down.svg") center / contain no-repeat;
-  -webkit-mask: url("assets/icons/chevron-down.svg") center / contain no-repeat;
 }
 
 .quote--dark {
@@ -2901,6 +2906,10 @@ html::-webkit-scrollbar-thumb:hover {
 
   .codigo-visual {
     min-height: 680px;
+  }
+
+  .codigo-visual::after {
+    display: none;
   }
 
   .codigo-visual__stage {
