@@ -184,27 +184,6 @@
       siblingIndexes.set(parent, currentIndex + 1);
     });
 
-    function tune(selector, options) {
-      document.querySelectorAll(selector).forEach((node, index) => {
-        if (options.y) node.style.setProperty("--reveal-y", options.y);
-        if (options.x) node.style.setProperty("--reveal-x", options.x);
-        if (options.duration) node.style.setProperty("--reveal-duration", options.duration);
-        if (options.delay !== undefined) {
-          const delay = typeof options.delay === "function" ? options.delay(index) : options.delay;
-          node.style.setProperty("--reveal-delay", `${delay}ms`);
-        }
-        if (options.className) node.classList.add(options.className);
-      });
-    }
-
-    tune(".site-header", { y: "-36px", delay: 0, duration: "900ms" });
-    tune(".slice-hero__copy", { y: "-40px", delay: 120, duration: "900ms" });
-    tune(".slice-hero__copy > *", { y: "-24px", delay: (index) => 280 + index * 160, duration: "900ms" });
-    tune(".slice-hero__visual", { y: "64px", delay: 240, duration: "1000ms", className: "hero-reveal-bg" });
-    tune(".slice-hero__photo", { y: "88px", delay: 520, duration: "1000ms" });
-    tune(".slice-hero__outsider", { y: "70px", delay: 760, duration: "940ms" });
-    tune(".slice-hero__school", { y: "70px", delay: 920, duration: "940ms" });
-
     const openingNodes = Array.from(
       new Set(document.querySelectorAll([
         ".site-header",
@@ -216,10 +195,13 @@
       ].join(","))),
     );
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        openingNodes.forEach((node) => node.classList.add("is-revealed"));
-      });
+    openingNodes.forEach((node) => {
+      node.classList.remove("reveal-fade-up", "hero-reveal-bg");
+      node.classList.add("is-revealed");
+      node.style.removeProperty("--reveal-delay");
+      node.style.removeProperty("--reveal-duration");
+      node.style.removeProperty("--reveal-x");
+      node.style.removeProperty("--reveal-y");
     });
 
     if (reducedMotion || !("IntersectionObserver" in window)) {
