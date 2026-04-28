@@ -8,6 +8,7 @@
   const REVEAL_STAGGER_MS = 120;
   const REVEAL_STAGGER_MAX_MS = 600;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   function updateScale() {
     const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
@@ -183,27 +184,6 @@
       siblingIndexes.set(parent, currentIndex + 1);
     });
 
-    function tune(selector, options) {
-      document.querySelectorAll(selector).forEach((node, index) => {
-        if (options.y) node.style.setProperty("--reveal-y", options.y);
-        if (options.x) node.style.setProperty("--reveal-x", options.x);
-        if (options.duration) node.style.setProperty("--reveal-duration", options.duration);
-        if (options.delay !== undefined) {
-          const delay = typeof options.delay === "function" ? options.delay(index) : options.delay;
-          node.style.setProperty("--reveal-delay", `${delay}ms`);
-        }
-        if (options.className) node.classList.add(options.className);
-      });
-    }
-
-    tune(".site-header", { y: "-36px", delay: 0, duration: "900ms" });
-    tune(".slice-hero__copy", { y: "-40px", delay: 120, duration: "900ms" });
-    tune(".slice-hero__copy > *", { y: "-24px", delay: (index) => 280 + index * 160, duration: "900ms" });
-    tune(".slice-hero__visual", { y: "64px", delay: 240, duration: "1000ms", className: "hero-reveal-bg" });
-    tune(".slice-hero__photo", { y: "88px", delay: 520, duration: "1000ms" });
-    tune(".slice-hero__outsider", { y: "70px", delay: 760, duration: "940ms" });
-    tune(".slice-hero__school", { y: "70px", delay: 920, duration: "940ms" });
-
     const openingNodes = Array.from(
       new Set(document.querySelectorAll([
         ".site-header",
@@ -215,10 +195,13 @@
       ].join(","))),
     );
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        openingNodes.forEach((node) => node.classList.add("is-revealed"));
-      });
+    openingNodes.forEach((node) => {
+      node.classList.remove("reveal-fade-up", "hero-reveal-bg");
+      node.classList.add("is-revealed");
+      node.style.removeProperty("--reveal-delay");
+      node.style.removeProperty("--reveal-duration");
+      node.style.removeProperty("--reveal-x");
+      node.style.removeProperty("--reveal-y");
     });
 
     if (reducedMotion || !("IntersectionObserver" in window)) {
@@ -245,6 +228,83 @@
       .forEach((node) => observer.observe(node));
   }
 
+  function initSmoothAnchorScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const hash = link.getAttribute("href");
+        if (!hash || hash === "#") return;
+
+        const target = document.querySelector(hash);
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: reducedMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    });
+  }
+
+  function initCustomCursor() {
+    if (!finePointer) return;
+
+    const cursor = document.createElement("div");
+    cursor.className = "cursor-orb";
+    cursor.setAttribute("aria-hidden", "true");
+    document.body.appendChild(cursor);
+    document.body.classList.add("has-custom-cursor");
+
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+    let hasPointer = false;
+
+    function setInteractiveState(target) {
+      const interactive = target.closest("a, button, [role='button'], .js-drag-scroll");
+      cursor.classList.toggle("is-interactive", Boolean(interactive));
+    }
+
+    function animate() {
+      currentX += (targetX - currentX) * 0.22;
+      currentY += (targetY - currentY) * 0.22;
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse") return;
+      targetX = event.clientX;
+      targetY = event.clientY;
+      if (!hasPointer) {
+        currentX = targetX;
+        currentY = targetY;
+        hasPointer = true;
+      }
+      cursor.classList.add("is-visible");
+      setInteractiveState(event.target);
+    });
+
+    window.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse") cursor.classList.add("is-dragging");
+    });
+
+    window.addEventListener("pointerup", () => {
+      cursor.classList.remove("is-dragging");
+    });
+
+    document.documentElement.addEventListener("mouseleave", () => {
+      cursor.classList.remove("is-visible", "is-interactive", "is-dragging");
+    });
+
+    document.documentElement.addEventListener("mouseenter", () => {
+      if (hasPointer) cursor.classList.add("is-visible");
+    });
+
+    animate();
+  }
+
   updateScale();
   window.addEventListener("resize", updateScale);
   window.addEventListener("load", updateScale);
@@ -253,5 +313,7 @@
     new ResizeObserver(updateScale).observe(page);
   }
   document.querySelectorAll(".js-drag-scroll").forEach(initCarousel);
+  initSmoothAnchorScroll();
   initRevealAnimations();
+  initCustomCursor();
 })();
