@@ -217,6 +217,7 @@ html::-webkit-scrollbar-thumb:hover {
   .site-header,
   .slice-hero__copy,
   .slice-hero__visual,
+  .slice-hero__visual::before,
   .slice-hero__visual > img {
     opacity: 1;
     translate: 0 0;
@@ -249,7 +250,7 @@ html::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 8, 24, 0.82);
   backdrop-filter: blur(26px);
   -webkit-backdrop-filter: blur(26px);
-  animation: osHeroFadeDown 760ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+  animation: osHeroFadeDown 920ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
 }
 
 .site-header__content {
@@ -449,7 +450,7 @@ html::-webkit-scrollbar-thumb:hover {
   align-items: center;
   gap: 32px;
   text-align: center;
-  animation: osHeroFadeDown 820ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+  animation: osHeroFadeUp 980ms cubic-bezier(0.16, 1, 0.3, 1) 360ms both;
 }
 
 .slice-hero .eyebrow {
@@ -484,7 +485,7 @@ html::-webkit-scrollbar-thumb:hover {
   background:
     radial-gradient(102.5% 79.8% at 14.67% 0%, #0f2d65 0%, #000a20 100%),
     #00133d;
-  animation: osHeroFadeUp 920ms cubic-bezier(0.16, 1, 0.3, 1) 240ms both;
+  animation: osHeroFadeUp 1040ms cubic-bezier(0.16, 1, 0.3, 1) 680ms both;
 }
 
 .slice-hero__visual::before,
@@ -504,6 +505,7 @@ html::-webkit-scrollbar-thumb:hover {
   background-image: url("assets/images/hero/gold-circle.png");
   background-size: cover;
   mix-blend-mode: plus-lighter;
+  animation: osHeroFadeUp 860ms cubic-bezier(0.16, 1, 0.3, 1) 1540ms both;
 }
 
 .slice-hero__visual::after {
@@ -523,7 +525,7 @@ html::-webkit-scrollbar-thumb:hover {
   bottom: 0;
   transform: translateX(-50%);
   z-index: 1;
-  animation: osHeroFadeUp 980ms cubic-bezier(0.16, 1, 0.3, 1) 420ms both;
+  animation: osHeroFadeUp 1120ms cubic-bezier(0.16, 1, 0.3, 1) 920ms both;
 }
 
 .slice-hero__outsider,
@@ -532,7 +534,7 @@ html::-webkit-scrollbar-thumb:hover {
   z-index: 2;
   width: 365px;
   top: 221px;
-  animation: osHeroFadeUp 900ms cubic-bezier(0.16, 1, 0.3, 1) 560ms both;
+  animation: osHeroFadeUp 940ms cubic-bezier(0.16, 1, 0.3, 1) 1180ms both;
 }
 
 .slice-hero__outsider {
@@ -542,7 +544,7 @@ html::-webkit-scrollbar-thumb:hover {
 .slice-hero__school {
   right: 530px;
   width: 298px;
-  animation-delay: 660ms;
+  animation-delay: 1320ms;
 }
 
 /* Slice 02 - About. Figma h=1088. */
