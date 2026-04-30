@@ -106,3 +106,64 @@ https://github.com/mezurash/mezurash-outsider-school-app
 - `script.js` presente.
 - Pasta `assets/` presente.
 - Estrutura de caminhos preservada.
+
+## Cenário ideal: evolução com React, Figma e IA
+
+Esta entrega está pronta para uso como página estática. Em um cenário ideal de evolução, ela também pode servir como base visual e estrutural para uma versão em React, com componentes reutilizáveis, melhor organização de código e um fluxo mais profissional entre design, desenvolvimento e manutenção.
+
+A ideia é usar este pacote como referência fiel da landing aprovada e, a partir dele, refatorar a interface em componentes como `Header`, `Hero`, `ProgramCard`, `ProofSection`, `Testimonials`, `Footer` e outros blocos reutilizáveis. Isso facilita manutenção, reaproveitamento em novas páginas, ajustes por seção e integração com qualquer infraestrutura moderna.
+
+Com o arquivo Figma enviado junto, o fluxo pode funcionar assim:
+
+- **Design to code:** o Figma orienta espaçamentos, hierarquia visual, imagens, tipografia e estados da interface. A IA pode ler o design e ajudar a transformar as telas em componentes React.
+- **Code to design:** depois que a implementação evolui, o código pode voltar a alimentar revisões no Figma, mantendo design e aplicação mais próximos.
+- **Ajustes contínuos:** quando houver uma mudança no Figma, a IA pode comparar a intenção visual com o código existente e sugerir alterações pontuais, sem recomeçar do zero.
+- **Mais performance e escala:** em React, a página pode ser quebrada em componentes, otimizada por seção, integrada com CMS, conectada a analytics e preparada para crescimento sem perder a base visual aprovada.
+
+### Prompt sugerido para Codex ou Claude Code
+
+Use este prompt dentro da pasta do projeto, depois de clonar ou baixar o repositório:
+
+```text
+Você está trabalhando neste projeto de landing page estática da Outsider School.
+
+Objetivo:
+Refatorar a página atual, feita em HTML, CSS e JavaScript puro, para uma aplicação React organizada em componentes reutilizáveis, preservando o máximo possível da fidelidade visual, responsividade, imagens, fontes, animações e comportamento atual.
+
+Contexto:
+- A versão atual aprovada está em index.html, styles.css, script.js e assets/.
+- O arquivo Figma de referência também será enviado como base visual.
+- A estrutura atual deve ser tratada como fonte de verdade para a landing já aprovada.
+
+Tarefas:
+1. Analisar index.html, styles.css e script.js antes de alterar qualquer coisa.
+2. Propor uma arquitetura React simples e clara.
+3. Separar a página em componentes por seção.
+4. Preservar os caminhos dos assets ou reorganizá-los de forma documentada.
+5. Manter a responsividade desktop/mobile.
+6. Manter ou recriar as interações atuais em React.
+7. Evitar mudanças visuais desnecessárias.
+8. Documentar como rodar o projeto depois da refatoração.
+
+Antes de implementar, apresente um plano curto com a estrutura de pastas sugerida.
+```
+
+### Prompt sugerido para trabalhar com Figma e React
+
+```text
+Use o arquivo Figma enviado como referência visual e compare com a landing implementada neste repositório.
+
+Objetivo:
+Criar ou ajustar componentes React a partir do design, mantendo consistência entre Figma e código.
+
+Fluxo esperado:
+1. Identificar as principais seções da landing no Figma.
+2. Mapear cada seção para um componente React.
+3. Comparar espaçamentos, tipografia, cores, imagens e estados com a implementação atual.
+4. Ajustar o código para ficar fiel ao design aprovado.
+5. Quando houver divergência entre Figma e código, apontar a diferença antes de alterar.
+6. Manter a implementação limpa, performática e fácil de evoluir.
+
+Prioridade:
+Preservar a identidade visual aprovada e transformar a entrega em uma base mais escalável para futuras páginas, testes e integrações.
+```
