@@ -2445,7 +2445,7 @@ html::-webkit-scrollbar-thumb:hover {
 @media (max-width: 1080px) {
   :root {
     --mobile-shell: 100%;
-    --mobile-grid: min(calc(100vw - 40px), 360px);
+    --mobile-grid: min(calc(100vw - 40px), 368px);
     --mobile-wide: min(calc(100vw - 20px), 390px);
     --mobile-header-h: 72px;
     --mobile-section-y-sm: 44px;
@@ -2654,39 +2654,46 @@ html::-webkit-scrollbar-thumb:hover {
     height: 286px;
     margin: 22px calc(var(--mobile-section-x) * -1) 0;
     opacity: 1;
+    overflow: hidden;
   }
 
   .slice-hero__visual::before {
     left: auto;
-    right: 20px;
+    right: max(22px, calc(50% - 184px + 22px));
     top: 34px;
     width: 82px;
     height: 59px;
+    z-index: 1;
   }
 
   .slice-hero__visual::after {
     height: 100%;
+    z-index: 0;
   }
 
   .slice-hero__photo {
-    width: 504px;
+    width: 482px;
     height: 286px;
     max-width: none;
+    left: 50%;
+    z-index: 4;
   }
 
   .slice-hero__outsider,
   .slice-hero__school {
-    top: 120px;
-    width: 104px;
+    top: 124px;
+    width: 110px;
+    z-index: 2;
   }
 
   .slice-hero__outsider {
-    left: 22px;
+    left: max(18px, calc(50% - 184px + 18px));
+    width: 126px;
   }
 
   .slice-hero__school {
-    right: 26px;
-    width: 86px;
+    right: max(16px, calc(50% - 184px + 16px));
+    width: 98px;
   }
 
   .slice-about,
@@ -2755,8 +2762,8 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .team-panel {
-    width: min(calc(100vw - 20px), 390px);
-    max-width: none;
+    width: var(--mobile-grid);
+    max-width: var(--mobile-grid);
     aspect-ratio: 16 / 9;
     object-fit: cover;
     margin-top: var(--mobile-space-8);
@@ -2765,26 +2772,29 @@ html::-webkit-scrollbar-thumb:hover {
 
   .metric-card {
     aspect-ratio: auto;
-    min-height: 380px;
+    min-height: 300px;
     border-radius: var(--mobile-card-r);
-    padding: 46px 32px 38px;
+    padding: 34px 28px 32px;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: center;
+    gap: 32px;
     text-align: center;
+    position: relative;
   }
 
   .metric-card > img {
     width: 22px;
     height: 22px;
-    align-self: flex-end;
+    position: absolute;
+    top: 34px;
+    right: 34px;
   }
 
   .metric-card > div {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
   .metric-card h3,
@@ -2808,8 +2818,8 @@ html::-webkit-scrollbar-thumb:hover {
   .metric-card strong,
   .metric-card strong span {
     justify-content: center;
-    font-size: 38px;
-    line-height: 32px;
+    font-size: 36px;
+    line-height: 38px;
     text-align: center !important;
   }
 
@@ -2928,8 +2938,16 @@ html::-webkit-scrollbar-thumb:hover {
     width: var(--mobile-grid);
     height: auto;
     aspect-ratio: 320 / 210;
-    margin: var(--mobile-space-8) 0 0;
+    margin: 24px 0 0;
     border-radius: var(--mobile-card-r);
+  }
+
+  .product-cover--codigo .program-cover {
+    margin-top: 24px;
+  }
+
+  .product-cover--chave .program-cover {
+    margin-top: 24px;
   }
 
   .program-cover::before,
@@ -3003,6 +3021,12 @@ html::-webkit-scrollbar-thumb:hover {
     font-size: var(--mobile-text-xs);
     line-height: 18px;
     text-align: center;
+  }
+
+  .video-final__text > p {
+    max-width: 312px;
+    margin-inline: auto;
+    text-wrap: balance;
   }
 
   .codigo-visual {
@@ -3275,12 +3299,12 @@ html::-webkit-scrollbar-thumb:hover {
     width: var(--mobile-grid);
     max-width: var(--mobile-grid);
     height: auto;
-    margin-top: var(--mobile-space-8);
+    margin: var(--mobile-space-8) auto 0;
     position: relative;
     display: grid;
-    grid-template-columns: 28px 1fr 28px;
+    grid-template-columns: 24px minmax(0, 1fr) 24px;
     align-items: center;
-    column-gap: 8px;
+    column-gap: 6px;
   }
 
   .proof-testimonial--master {
@@ -3350,6 +3374,12 @@ html::-webkit-scrollbar-thumb:hover {
     aspect-ratio: 326 / 512;
   }
 
+  .alumni .alumni-row {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: 0;
+  }
+
   .alumni-row span {
     visibility: visible;
   }
@@ -3361,6 +3391,12 @@ html::-webkit-scrollbar-thumb:hover {
   .video-final__text > div {
     width: var(--mobile-grid);
     gap: 18px;
+  }
+
+  .video-final h2 {
+    max-width: 340px;
+    margin-inline: auto;
+    text-wrap: balance;
   }
 
   .video-card {
