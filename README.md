@@ -1,116 +1,79 @@
-# Outsider School Home
+# Outsider School Landing Page
 
-Landing page estatica da Outsider School, pronta para publicar em um repositorio publico ou hospedar como site estatico.
+Implementacao estatica da landing page da Outsider School.
 
-## Como importar o projeto
+Este pacote foi preparado para entrega e importacao em outra infraestrutura. A pagina nao depende de build, framework ou servidor Node para funcionar: ela e composta por HTML, CSS, JavaScript e arquivos de imagem/fontes locais.
 
-1. Crie um novo repositorio publico no GitHub.
-2. Copie todos os arquivos deste projeto para o novo repositorio.
-3. No novo repositorio, instale as dependencias:
-
-```bash
-npm install
-```
-
-4. Rode o projeto localmente:
-
-```bash
-npx http-server . -a 127.0.0.1 -p 4173 -c-1
-```
-
-5. Abra no navegador:
+## Estrutura do projeto
 
 ```text
-http://127.0.0.1:4173
+.
+├── index.html
+├── styles.css
+├── script.js
+├── assets/
+│   ├── fonts/
+│   ├── icons/
+│   ├── images/
+│   └── logos/
+└── imagens-exported/
+    ├── chevron-left.svg
+    ├── chevron-right.svg
+    └── circle-box.svg
 ```
 
 ## Arquivos principais
 
-- `index.html`: estrutura da landing page.
-- `styles.css`: estilos, responsividade e ajustes mobile/desktop.
-- `script.js`: interacoes, carrosseis e animacoes.
-- `package.json`: scripts e dependencias de desenvolvimento.
-- `package-lock.json`: versoes travadas das dependencias.
-- `playwright.config.js`: configuracao dos testes visuais.
+- `index.html`: estrutura completa da landing page.
+- `styles.css`: estilos, responsividade, fontes e layout desktop/mobile.
+- `script.js`: interacoes da pagina, animacoes de entrada e comportamento dos carrosseis.
+- `assets/`: imagens, logos, icones e fontes usados pela implementacao.
+- `imagens-exported/`: pequenos assets adicionais referenciados pelo HTML/CSS.
 
-## Pastas principais
+## Especificacoes tecnicas
 
-- `assets/`: imagens, logos, icones e fontes usadas pela pagina.
-- `assets/images/`: imagens finais da landing page.
-- `assets/logos/`: logos dos programas e marcas.
-- `assets/icons/`: icones usados nos cards, botoes e secoes.
-- `assets/fonts/`: fontes locais SF Pro Display.
-- `imagens-exported/`: assets exportados e usados em algumas secoes.
-- `tests/`: testes automatizados com Playwright e validacao de assets.
-- `docs/`: documentacao auxiliar do processo.
+- Projeto estatico em HTML, CSS e JavaScript puro.
+- Nao usa React, Vue, Next.js, Vite ou outro framework.
+- Nao possui etapa obrigatoria de build.
+- O arquivo de entrada da pagina e `index.html`.
+- As imagens, logos, icones e fontes precisam permanecer junto do projeto, mantendo os mesmos caminhos relativos.
+- O CSS carrega fontes locais em `assets/fonts/`.
+- Os carrosseis e interacoes dependem de `script.js`.
 
-## Arquivos de apoio
+## Como usar em outro projeto ou infraestrutura
 
-Estes arquivos ajudam a documentar o processo de construcao, mas nao sao obrigatorios para a pagina funcionar em producao:
-
-- `CHECKPOINT_TIMELINE.md`
-- `MOBILE_ACTION_PLAN.md`
-- `context-claude.md`
-- `figma-dump.md`
-- `figma-dump-mobile.md`
-- `figma-slices-full.md`
-- `collect-figma-dump.mjs`
-- `css-export.css`
-- `imagens/`
-- `fonts/`
-- `os-home-fig-2.fig`
-
-## Comandos uteis
-
-Instalar dependencias:
+1. Clone o repositorio publico:
 
 ```bash
-npm install
+git clone <URL_DO_REPOSITORIO_PUBLICO>
 ```
 
-Rodar servidor local:
-
-```bash
-npx http-server . -a 127.0.0.1 -p 4173 -c-1
-```
-
-Rodar testes:
-
-```bash
-npm test
-```
-
-Rodar apenas validacao de assets:
-
-```bash
-npm run test:assets
-```
-
-Rodar apenas testes visuais:
-
-```bash
-npm run test:visual
-```
-
-## Publicacao
-
-Este projeto e estatico. Para publicar, basta hospedar os arquivos do repositorio em qualquer servico que sirva HTML/CSS/JS, como:
-
-- GitHub Pages
-- Netlify
-- Vercel
-- Cloudflare Pages
-- servidor proprio com Nginx/Apache
-
-O arquivo de entrada e:
+2. Copie para a infraestrutura de destino os arquivos e pastas abaixo:
 
 ```text
 index.html
+styles.css
+script.js
+assets/
+imagens-exported/
 ```
 
-## Observacoes de entrega
+3. Configure o servidor, CMS ou ambiente do cliente para servir `index.html` como pagina principal.
 
-- O projeto atual esta ajustado para desktop, tablet e mobile.
-- Os assets sao locais, sem dependencia de CDN para a interface principal.
-- Antes de entregar ou publicar, rode `npm test` para validar assets e smoke tests visuais.
-- A branch `done` foi criada a partir da `dev` para concentrar a versao de entrega ao cliente.
+4. Mantenha a estrutura de pastas exatamente como esta no repositorio. Se algum caminho for alterado, sera necessario atualizar as referencias em `index.html` e `styles.css`.
+
+## Observacoes para integracao
+
+- Se a landing for importada para WordPress, Webflow, Framer ou outro CMS, mantenha os assets em uma pasta publica e ajuste os caminhos conforme a estrutura do ambiente.
+- Se a infraestrutura usar CDN, suba `assets/` e `imagens-exported/` para a CDN e atualize os caminhos relativos no HTML/CSS.
+- Se o cliente quiser separar secoes em componentes, use `index.html` como fonte da estrutura e `styles.css` como fonte visual.
+- Evite renomear arquivos de imagem sem atualizar todas as referencias.
+
+## Checklist de entrega
+
+- `index.html` presente.
+- `styles.css` presente.
+- `script.js` presente.
+- Pasta `assets/` presente.
+- Pasta `imagens-exported/` presente com os SVGs usados.
+- Estrutura de caminhos preservada.
