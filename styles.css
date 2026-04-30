@@ -2076,11 +2076,11 @@ html::-webkit-scrollbar-thumb:hover {
   height: 36px;
   position: relative;
   flex: 0 0 auto;
-  background: url("imagens-exported/chevron-left.svg") center / contain no-repeat;
+  background: url("assets/icons/chevron-left.svg") center / contain no-repeat;
 }
 
 .proof-testimonial__arrow--next {
-  background-image: url("imagens-exported/chevron-right.svg");
+  background-image: url("assets/icons/chevron-right.svg");
 }
 
 .proof-testimonial blockquote {
